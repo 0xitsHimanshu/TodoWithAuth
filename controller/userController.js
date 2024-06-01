@@ -5,7 +5,12 @@ import ErrorHandler from "../middlewares/error.js";
 
 
 export const getAllUser = async (req, res) => {
-
+    try{
+        const users = await User.find();
+        res.status(200).json({users});
+    } catch (error) {
+        next(error);
+    }
 };
 
 export const login = async (req, res, next) => {
@@ -59,6 +64,7 @@ export const register = async (req, res) => {
               user: req.user,
           });
   };
+
 export const getMyProfile = (req, res) => {
 
     res.status(200).json({
